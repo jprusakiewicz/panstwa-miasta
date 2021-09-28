@@ -9,30 +9,26 @@ public class VotingManager : MonoBehaviour
     [SerializeField] private GameObject CategoryName;
     [SerializeField] private GameObject VotingItem;
     [SerializeField] private GameObject Content;
+    GameObject[] UI;
     [SerializeField] private bool juzCzas;
-    private Dictionary<string, List<VoteObject>> a;
+//    private Dictionary<string, List<VoteObject>> a;
+    private List<GameObject> words = new List<GameObject>();
+    Dictionary<string, List<VoteObject>> categories = new Dictionary<string, List<VoteObject>>();
 
-    void Start()
+
+    private void Start()
     {
-        var c = new List<string>()
-            {"jeden", "dwa", "trzy", "cztary"};
-        var t = new Dictionary<string, List<string>>() {{"Państwo", c}, {"Miasto", c}};
-        a = SetVoting(t);
+        UI = GameObject.FindGameObjectsWithTag("Voting_UI");
     }
 
-    private void Update()
+
+    public void SetVoting(Dictionary<string, List<string>> votingConfig)
     {
-        if (juzCzas == true)
+        foreach (var obj in UI)
         {
-            juzCzas = false;
-            GetVotingResults(a);
+            obj.SetActive(true);
         }
-    }
-
-    public Dictionary<string, List<VoteObject>> SetVoting(Dictionary<string, List<string>> votingConfig)
-    {
-        var categories = new Dictionary<string, List<VoteObject>>();
-
+    
         foreach (var category in votingConfig)
         {
             var newCategory = Instantiate(CategoryName, new Vector3(), Quaternion.identity);
@@ -44,6 +40,7 @@ public class VotingManager : MonoBehaviour
             {
                 var newWord = Instantiate(VotingItem, new Vector3(), gameObject.transform.rotation);
                 newWord.transform.SetParent(Content.transform);
+                words.Add(newWord);
                 VoteObject voteObject = newWord.GetComponentInChildren<VoteObject>();
                 voteObject.SetText(word);
 
@@ -52,14 +49,26 @@ public class VotingManager : MonoBehaviour
 
             categories.Add(category.Key, voteObjects);
         }
-
-        return categories;
     }
 
-    public void GetVotingResults(Dictionary<string, List<VoteObject>> votings)
+    public void ResetStage()
+    {
+        foreach (var obj in UI)
+        {
+            obj.SetActive(false);
+        }
+        foreach (Transform child in Content.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        words = new List<GameObject>();
+        categories = new Dictionary<string, List<VoteObject>>();
+    }
+
+    public string GetVotingResults()
     {
         var results = new Dictionary<string, Dictionary<string, bool?>>();
-        foreach (var category in votings)
+        foreach (var category in categories)
         {
             var votingResults = new Dictionary<string, bool?>();
             foreach (var voting in category.Value)
@@ -67,8 +76,10 @@ public class VotingManager : MonoBehaviour
                 var result = voting.GetResults();
                 votingResults.Add(result.Item1, result.Item2);
             }
+
             results.Add(category.Key, votingResults);
         }
-        Debug.Log(JsonConvert.SerializeObject(results));
+
+        return JsonConvert.SerializeObject(results);
     }
 }

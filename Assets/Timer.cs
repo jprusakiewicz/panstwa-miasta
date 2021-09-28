@@ -9,9 +9,13 @@ public class Timer : MonoBehaviour
     TextMeshProUGUI text;
     private DateTime deadline;
     private DateTime delta;
+    private ConnectionManager connectionManager;
+    private bool hasSend = true;
 
     void Start()
     {
+        connectionManager = GameObject.Find("GameController").GetComponent<ConnectionManager>();
+
         text = GetComponentInChildren<TextMeshProUGUI>();
         text.text = " ";
     }
@@ -20,6 +24,12 @@ public class Timer : MonoBehaviour
     void Update()
     {
         var delta = deadline - DateTime.Now;
+        if (delta.Seconds < 0 && !hasSend)
+        {
+            connectionManager.SendResults();
+            hasSend = true;
+        }
+
         if (0 < delta.Seconds || delta.Seconds > 50)
         {
             var timeAsString = delta.Seconds.ToString();
@@ -34,6 +44,7 @@ public class Timer : MonoBehaviour
 
     public void SetTimer(DateTime timestamp)
     {
+        hasSend = false;
         deadline = timestamp;
     }
 }

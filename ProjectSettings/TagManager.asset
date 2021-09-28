@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - word
+  - Completing_UI
+  - Voting_UI
+  - Results_UI
   layers:
   - Default
   - TransparentFX

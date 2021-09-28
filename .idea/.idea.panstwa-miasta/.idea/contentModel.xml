@@ -1992,9 +1992,12 @@
         <e p="Editor" t="Include">
           <e p="RemoveMobileSupportWarningWebBuild.cs" t="Include" />
         </e>
+        <e p="Headers.cs" t="Include" />
         <e p="JsonDotNet" t="Include">
           <e p="link.xml" t="Include" />
         </e>
+        <e p="ResultsManager.cs" t="Include" />
+        <e p="ResultsRow.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="FirstStageControler.cs" t="Include" />
           <e p="SecondStageControler.cs" t="Include" />
