@@ -11,10 +11,9 @@ public class Item
     [JsonProperty("game_state")] public string gameState { get; set; }
     [JsonProperty("game_data")] public GameData gameData { get; set; }
 
-   
+
     public DateTime timestamp { get; set; }
     //    public Dictionary<string, string> nicks { get; set; }
-
 }
 
 public class GameData
@@ -38,6 +37,7 @@ public class PlayerSingleResult
     public int score { get; set; }
     public string word { get; set; }
 }
+
 public class Config
 {
     // do not change variables names names
@@ -73,7 +73,9 @@ public class ConnectionManager : MonoBehaviour
         voting = GameObject.Find("Voting").GetComponent<VotingManager>();
         results = GameObject.Find("Results").GetComponent<ResultsManager>();
 
-
+//        string r = UnityEngine.Random.Range(1, 10000).ToString();
+//        Debug.Log("my id is: " + r);
+//        config = new Config {player_id = r, room_id = "1", server_address = "ws://localhost:5000/test/", player_nick = "player"};
 //        config = new Config
 //        {
 //            player_id = "1", room_id = "1", server_address = "ws://localhost:5000/test/", player_nick = "player"
@@ -173,6 +175,7 @@ public class ConnectionManager : MonoBehaviour
             case "SCORE_DISPLAY":
                 break;
         }
+
         Debug.Log(results);
         if (!string.IsNullOrEmpty(results))
             SendUpdateToServer(results);

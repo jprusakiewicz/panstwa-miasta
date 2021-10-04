@@ -38,7 +38,7 @@ public class SecondStageControler : MonoBehaviour
             newWord.transform.SetParent(gameObject.transform);
             newWord.GetComponent<Word>().SetCategory(category);
             wordPrefabs.Add(newWord);
-            offset -= 75;
+            offset -= 49;
         }
     }
 

@@ -10,8 +10,6 @@ public class VotingManager : MonoBehaviour
     [SerializeField] private GameObject VotingItem;
     [SerializeField] private GameObject Content;
     GameObject[] UI;
-    [SerializeField] private bool juzCzas;
-//    private Dictionary<string, List<VoteObject>> a;
     private List<GameObject> words = new List<GameObject>();
     Dictionary<string, List<VoteObject>> categories = new Dictionary<string, List<VoteObject>>();
 

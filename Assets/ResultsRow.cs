@@ -32,7 +32,7 @@ public class ResultsRow : MonoBehaviour
                         c = Color.red;
                         break;
                     case 5:
-                        c = Color.black;
+                        c = new Color(235,152,52);
                         break;
                     case 10:
                         c = Color.yellow;
@@ -41,7 +41,7 @@ public class ResultsRow : MonoBehaviour
                         c = Color.green;
                         break;
                     default:
-                        c = Color.black;
+                        c = Color.white;
                         break;
                 }
                 child.transform.Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text =
