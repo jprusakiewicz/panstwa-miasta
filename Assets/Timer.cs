@@ -32,7 +32,8 @@ public class Timer : MonoBehaviour
 
         if (0 < delta.Seconds || delta.Seconds > 50)
         {
-            var timeAsString = delta.Seconds.ToString();
+            var seconds = delta.Seconds + delta.Minutes * 60;
+            var timeAsString = seconds.ToString();
             if (text.text != timeAsString)
             {
                 text.text = timeAsString;

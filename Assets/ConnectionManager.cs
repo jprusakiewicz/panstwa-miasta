@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using BestHTTP;
 using UnityEngine;
 using BestHTTP.WebSocket;
 using Newtonsoft.Json;
@@ -45,6 +46,7 @@ public class Config
     public string room_id;
     public string server_address;
     public string player_nick;
+    public string watchdog_address;
 }
 
 public class ConnectionManager : MonoBehaviour
@@ -66,6 +68,10 @@ public class ConnectionManager : MonoBehaviour
     private const float connectTimeout = 3;
     private float timeFromLastConnectionRequest = connectTimeout;
 
+    private const float KeepAliveTimeout = 8;
+
+    private float timeFromLastKeepAlive = 0;
+
     void Start()
     {
         timer = GameObject.Find("Timer").GetComponent<Timer>();
@@ -86,7 +92,19 @@ public class ConnectionManager : MonoBehaviour
 
     private void Update()
     {
-        if ((string.IsNullOrEmpty(config.player_id) || webSocket != null) &&
+        // keep alive
+        if (timeFromLastKeepAlive >= KeepAliveTimeout)
+        {
+            KeepAlive();
+            timeFromLastKeepAlive = 0;
+        }
+        else
+        {
+            timeFromLastKeepAlive += Time.deltaTime;
+        }
+
+        if (config == null ||
+        (string.IsNullOrEmpty(config.player_id) || webSocket != null) &&
             (string.IsNullOrEmpty(config.player_id) || webSocket.IsOpen)) return;
         if (timeFromLastConnectionRequest >= connectTimeout)
         {
@@ -99,6 +117,14 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
+    private void KeepAlive()
+    {
+        if (string.IsNullOrEmpty(config.watchdog_address)) return;
+        var newUri = config.watchdog_address + "/keep_alive/" + config.player_id;
+        Debug.Log(newUri);
+        var request = new HTTPRequest(new Uri(newUri), methodType: HTTPMethods.Post);
+        request.Send();
+    }
 
     private WebSocket ConnectToServer(Config config)
     {
