@@ -77,7 +77,12 @@ public class VotingManager : MonoBehaviour
 
             results.Add(category.Key, votingResults);
         }
+//        results.Add("gameState", "VOTING");
 
-        return JsonConvert.SerializeObject(results);
+        var resultsWithCategory = new Dictionary<string, dynamic>();
+        
+        resultsWithCategory.Add("results", results);
+        resultsWithCategory.Add("gameState", "VOTING");
+        return JsonConvert.SerializeObject(resultsWithCategory);
     }
 }

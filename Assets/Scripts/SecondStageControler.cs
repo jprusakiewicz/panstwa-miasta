@@ -10,6 +10,7 @@ public class SecondStageControler : MonoBehaviour
     [SerializeField] private GameObject wordPrefab;
     [SerializeField] private GameObject letterDisplay;
     [SerializeField] private GameObject firstWordPosition;
+    [SerializeField] private GameObject gameController;
     GameObject[] UI;
 
     private List<GameObject> wordPrefabs = new List<GameObject>();
@@ -27,6 +28,7 @@ public class SecondStageControler : MonoBehaviour
         {
             obj.SetActive(true);
         }
+
         int offset = 0;
         foreach (string category in categories)
         {
@@ -37,8 +39,10 @@ public class SecondStageControler : MonoBehaviour
             var newWord = Instantiate(wordPrefab, newPosition, gameObject.transform.rotation);
             newWord.transform.SetParent(gameObject.transform);
             newWord.GetComponent<Word>().SetCategory(category);
+            newWord.GetComponent<Word>().SetManager(gameController);
+
             wordPrefabs.Add(newWord);
-            offset -= 55;
+            offset -= 68;
         }
     }
 
@@ -64,7 +68,6 @@ public class SecondStageControler : MonoBehaviour
 
     public void SetStage(string draftedLetter, List<string> categories)
     {
-        //todo reset stage
         SetLetter(draftedLetter);
         SetCategories(categories);
         // todo set timer?
@@ -79,6 +82,10 @@ public class SecondStageControler : MonoBehaviour
             fields.Add(wordField["category"], wordField["value"]);
         }
 
-        return JsonConvert.SerializeObject(fields);
+        var resultsWithCategory = new Dictionary<string, dynamic>();
+
+        resultsWithCategory.Add("results", fields);
+        resultsWithCategory.Add("gameState", "COMPLETING");
+        return JsonConvert.SerializeObject(resultsWithCategory);
     }
 }

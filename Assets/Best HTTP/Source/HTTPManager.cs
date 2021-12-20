@@ -68,8 +68,8 @@ namespace BestHTTP
 
 #if NETFX_CORE
             IOService = new PlatformSupport.FileSystem.NETFXCOREIOService();
-#elif UNITY_WEBGL && !UNITY_EDITOR
-            IOService = new PlatformSupport.FileSystem.WebGLIOService();
+//#elif UNITY_WEBGL && !UNITY_EDITOR
+//            IOService = new PlatformSupport.FileSystem.WebGLIOService();
 #else
             IOService = new PlatformSupport.FileSystem.DefaultIOService();
 #endif
@@ -269,7 +269,7 @@ namespace BestHTTP
         /// <summary>
         /// User-agent string that will be sent with each requests.
         /// </summary>
-        public static string UserAgent = "BestHTTP/2 v2.5.2";
+        public static string UserAgent = "BestHTTP/2 v2.5.3";
 
         /// <summary>
         /// It's true if the application is quitting and the plugin is shutting down itself.

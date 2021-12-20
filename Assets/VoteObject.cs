@@ -12,11 +12,15 @@ public class VoteObject : MonoBehaviour
     [SerializeField] private GameObject noMark;
     Button yesButton;
     Button noButton;
+    private ConnectionManager connectionManager;
+
 
     private bool? vote;
 
     void Start()
     {
+        connectionManager = GameObject.Find("GameController").GetComponent<ConnectionManager>();
+
         yesButton = yesMark.GetComponent<Button>();
         noButton = noMark.GetComponent<Button>();
 
@@ -40,12 +44,14 @@ public class VoteObject : MonoBehaviour
     {
         vote = true;
         RefreshVisualPress();
+        CallManager();
     }
 
     void SetVoteFalse()
     {
         vote = false;
         RefreshVisualPress();
+        CallManager();
     }
 
     void RefreshVisualPress()
@@ -71,5 +77,10 @@ public class VoteObject : MonoBehaviour
             yesMark.GetComponent<Image>().color =
                 new Color(currentYesColor.r, currentYesColor.g, currentYesColor.b, 0.55f);
         }
+    }
+    
+    public void CallManager()
+    {
+        connectionManager.SendResults();
     }
 }

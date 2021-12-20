@@ -813,7 +813,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &390449828
 MonoBehaviour:
@@ -1838,6 +1838,7 @@ MonoBehaviour:
     type: 3}
   letterDisplay: {fileID: 699233168}
   firstWordPosition: {fileID: 798464155}
+  gameController: {fileID: 1072554933}
 --- !u!1 &810098803
 GameObject:
   m_ObjectHideFlags: 0

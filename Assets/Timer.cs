@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var delta = deadline - DateTime.Now;
+        var delta = deadline - DateTime.Now - TimeSpan.FromSeconds(2);
         if (delta.Seconds < 0 && !hasSend)
         {
             connectionManager.SendResults();
@@ -47,5 +47,10 @@ public class Timer : MonoBehaviour
     {
         hasSend = false;
         deadline = timestamp;
+    }
+
+    public void DisableSending()
+    {
+        hasSend = true;
     }
 }

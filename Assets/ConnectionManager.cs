@@ -5,7 +5,9 @@ using BestHTTP;
 using UnityEngine;
 using BestHTTP.WebSocket;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine.Rendering;
+using WebGLInput = WebGLSupport.WebGLInput;
 
 public class Item
 {
@@ -81,7 +83,7 @@ public class ConnectionManager : MonoBehaviour
 
 //        string r = UnityEngine.Random.Range(1, 10000).ToString();
 //        Debug.Log("my id is: " + r);
-//        config = new Config {player_id = r, room_id = "1", server_address = "ws://localhost:5000/test/", player_nick = "player"};
+//        config = new Config {player_id = "r", room_id = "1", server_address = "ws://localhost:5000/ws/", player_nick = "player"};
 //        config = new Config
 //        {
 //            player_id = "1", room_id = "1", server_address = "ws://localhost:5000/test/", player_nick = "player"
@@ -141,6 +143,7 @@ public class ConnectionManager : MonoBehaviour
 
     private void ClearDesk()
     {
+        ResetAllInputs();
         waitingText.SetActive(false);
         completing.ResetStage();
         voting.ResetStage();
@@ -194,6 +197,7 @@ public class ConnectionManager : MonoBehaviour
                 break;
             case "COMPLETING":
                 results = completing.GetFields();
+                ResetAllInputs();
                 break;
             case "VOTING":
                 results = voting.GetVotingResults();
@@ -205,5 +209,16 @@ public class ConnectionManager : MonoBehaviour
         Debug.Log(results);
         if (!string.IsNullOrEmpty(results))
             SendUpdateToServer(results);
+    }
+
+    private void ResetAllInputs()
+    {
+        var words = GameObject.FindGameObjectsWithTag("word");
+        foreach (var word in words)
+        {
+            var webGlInput = word.GetComponentInChildren<WebGLInput>();
+            if (!webGlInput.Blur())
+                webGlInput.DeactivateInputField();
+        }
     }
 }
