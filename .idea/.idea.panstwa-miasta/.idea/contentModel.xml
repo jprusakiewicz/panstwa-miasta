@@ -10,6 +10,82 @@
         <e p="Best HTTP" t="Include">
           <e p="BestHTTP.asmdef" t="Include" />
           <e p="Documentation.txt" t="Include" />
+          <e p="Examples" t="Include">
+            <e p="Helpers" t="Include">
+              <e p="Components" t="Include">
+                <e p="Cache.cs" t="Include" />
+                <e p="Cookies.cs" t="Include" />
+              </e>
+              <e p="GUIHelper.cs" t="Include" />
+              <e p="Link.cs" t="Include" />
+              <e p="SampleBase.cs" t="Include" />
+              <e p="SelectorUI" t="Include">
+                <e p="Category.cs" t="Include" />
+                <e p="ExampleInfo.cs" t="Include" />
+                <e p="ExampleListItem.cs" t="Include" />
+                <e p="SampleSelectorUI.cs" t="Include" />
+              </e>
+              <e p="TextListItem.cs" t="Include" />
+            </e>
+            <e p="HTTP" t="Include">
+              <e p="AssetBundleSample.cs" t="Include" />
+              <e p="MultipartFormDataStream.cs" t="Include" />
+              <e p="ResumableStreamingSample.cs" t="Include" />
+              <e p="StreamingSample.cs" t="Include" />
+              <e p="TextureDownloadSample.cs" t="Include" />
+              <e p="UploadStream.cs" t="Include" />
+            </e>
+            <e p="Plugin" t="Include">
+              <e p="AsyncExtensions.cs" t="Include" />
+            </e>
+            <e p="SampleRoot.cs" t="Include" />
+            <e p="Server-Sent Events" t="Include">
+              <e p="SimpleSample.cs" t="Include" />
+            </e>
+            <e p="SignalR" t="Include">
+              <e p="Authentication Providers" t="Include">
+                <e p="SampleCookieAuthentication.cs" t="Include" />
+                <e p="SampleHeaderAuthentication.cs" t="Include" />
+              </e>
+              <e p="Json Encoders" t="Include">
+                <e p="JSonDotnetEncoder.cs" t="Include" />
+                <e p="LitJsonEncoder.cs" t="Include" />
+              </e>
+            </e>
+            <e p="SignalRCore" t="Include">
+              <e p="AsyncTestHubSample.cs" t="Include" />
+              <e p="Authentication Providers" t="Include">
+                <e p="HeaderAuthenticator.cs" t="Include" />
+              </e>
+              <e p="encoders" t="Include">
+                <e p="JSonDotnetEncoder.cs" t="Include" />
+                <e p="LitJsonEncoder.cs" t="Include" />
+                <e p="MessagePackProtocol.cs" t="Include" />
+              </e>
+              <e p="HubWithAuthorizationSample.cs" t="Include" />
+              <e p="HubWithPreAuthorizationSample.cs" t="Include" />
+              <e p="Person.cs" t="Include" />
+              <e p="RedirectSample.cs" t="Include" />
+              <e p="TestHubSample.cs" t="Include" />
+              <e p="UploadHubSample.cs" t="Include" />
+            </e>
+            <e p="SocketIO" t="Include">
+              <e p="SocketIO Json Encoders" t="Include">
+                <e p="JSonDotnetEncoder.cs" t="Include" />
+                <e p="LitJsonEncoder.cs" t="Include" />
+              </e>
+              <e p="SocketIOChatSample.cs" t="Include" />
+            </e>
+            <e p="SocketIO3" t="Include">
+              <e p="ChatSample.cs" t="Include" />
+              <e p="Parsers" t="Include">
+                <e p="MsgPackParser.cs" t="Include" />
+              </e>
+            </e>
+            <e p="WebSocket" t="Include">
+              <e p="WebSocketSample.cs" t="Include" />
+            </e>
+          </e>
           <e p="License.txt" t="Include" />
           <e p="link.xml" t="Include" />
           <e p="link_android_subset.xml" t="Include" />
@@ -2040,6 +2116,25 @@
           <e p="UFL.txt" t="Include" />
         </e>
         <e p="VoteObject.cs" t="Include" />
+        <e p="WebGLSupport" t="Include">
+          <e p="WebGLInput" t="Include">
+            <e p="Detail" t="Include">
+              <e p="RebuildChecker.cs" t="Include" />
+            </e>
+            <e p="Mobile" t="Include">
+              <e p="WebGLInputMobile.cs" t="Include" />
+            </e>
+            <e p="WebGLInput.cs" t="Include" />
+            <e p="Wrapper" t="Include">
+              <e p="IInputField.cs" t="Include" />
+              <e p="WrappedInputField.cs" t="Include" />
+              <e p="WrappedTMPInputField.cs" t="Include" />
+            </e>
+          </e>
+          <e p="WebGLWindow" t="Include">
+            <e p="WebGLWindow.cs" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="BestHTTP.csproj" t="IncludeRecursive" />
       <e p="Library" t="ExcludeRecursive" />

@@ -13,10 +13,7 @@ public class Item
 {
     [JsonProperty("game_state")] public string gameState { get; set; }
     [JsonProperty("game_data")] public GameData gameData { get; set; }
-
-
     public DateTime timestamp { get; set; }
-    //    public Dictionary<string, string> nicks { get; set; }
 }
 
 public class GameData
@@ -24,7 +21,6 @@ public class GameData
     public List<string> categories { get; set; }
     public Dictionary<string, List<string>> candidates { get; set; }
     public Dictionary<string, PlayerOverallResult> results { get; set; }
-
     public string letter { get; set; }
 }
 
@@ -43,7 +39,7 @@ public class PlayerSingleResult
 
 public class Config
 {
-    // do not change variables names names
+    // do not change variables names
     public string player_id;
     public string room_id;
     public string server_address;
@@ -60,7 +56,6 @@ public class ConnectionManager : MonoBehaviour
     private ResultsManager results;
     private VotingManager voting;
 
-
     [SerializeField] GameObject waitingText;
     private GameObject[] disableUIs;
     private Timer timer;
@@ -69,9 +64,7 @@ public class ConnectionManager : MonoBehaviour
 
     private const float connectTimeout = 3;
     private float timeFromLastConnectionRequest = connectTimeout;
-
     private const float KeepAliveTimeout = 8;
-
     private float timeFromLastKeepAlive = 0;
 
     void Start()
@@ -94,7 +87,6 @@ public class ConnectionManager : MonoBehaviour
 
     private void Update()
     {
-        // keep alive
         if (timeFromLastKeepAlive >= KeepAliveTimeout)
         {
             KeepAlive();
@@ -143,7 +135,6 @@ public class ConnectionManager : MonoBehaviour
 
     private void ClearDesk()
     {
-        ResetAllInputs();
         waitingText.SetActive(false);
         completing.ResetStage();
         voting.ResetStage();
@@ -172,7 +163,6 @@ public class ConnectionManager : MonoBehaviour
                 results.SetResults(item.gameData.results);
                 break;
         }
-
         timer.SetTimer(item.timestamp);
     }
 
@@ -197,7 +187,6 @@ public class ConnectionManager : MonoBehaviour
                 break;
             case "COMPLETING":
                 results = completing.GetFields();
-                ResetAllInputs();
                 break;
             case "VOTING":
                 results = voting.GetVotingResults();
@@ -209,16 +198,5 @@ public class ConnectionManager : MonoBehaviour
         Debug.Log(results);
         if (!string.IsNullOrEmpty(results))
             SendUpdateToServer(results);
-    }
-
-    private void ResetAllInputs()
-    {
-        var words = GameObject.FindGameObjectsWithTag("word");
-        foreach (var word in words)
-        {
-            var webGlInput = word.GetComponentInChildren<WebGLInput>();
-            if (!webGlInput.Blur())
-                webGlInput.DeactivateInputField();
-        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VotingManager : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class VotingManager : MonoBehaviour
 
             categories.Add(category.Key, voteObjects);
         }
+        Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition = 1;
     }
 
     public void ResetStage()
